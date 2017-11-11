@@ -9,12 +9,15 @@ s.summary         = "walinnslib"
 s.homepage        = "https://github.com/Rejoylin/swiftLib"
 #5.
 s.license              = "MIT"
-#6.
+#6.d
 s.author               = "walinns"
 #7.
-s.platform            = :ios, "9.3"
+s.module_name          = "WalinnsTracker"
 #8.
-s.source              = { :git => "https://github.com/Rejoylin/swiftLib.git", :tag => "1.0.0" }
+s.platform            = :ios, "10.3"
 #9.
-s.source_files     = "swiftLib", "swiftLib/**/*.{h,m,swift}"
+s.source              = { :git => "https://github.com/Rejoylin/swiftLib.git", :tag => "1.0.0" }
+#10.
+s.source_files     = "WalinnsLib", "WalinnsLib/**/*.{h,m,swift}"
 end
+

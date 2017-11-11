@@ -15,9 +15,13 @@ class WalinnsTracker: NSObject {
     //sharedInstance
     static let sharedInstance = WalinnsTracker()
     
-    func initialize(project_token : String)  {
+     func initialize(project_token : String)  {
         print("WlinnsTrackerClient" + project_token)
         WalinnsTrackerClient.init(token: project_token)
+    }
+    
+    func start(project_token : String)  {
+        print(project_token)
     }
 }
 
