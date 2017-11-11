@@ -10,12 +10,12 @@
 import Foundation
 import UIKit
 
-class WalinnsTracker: NSObject {
+public class WalinnsTracker: NSObject {
 
     //sharedInstance
     static let sharedInstance = WalinnsTracker()
     
-     func initialize(project_token : String)  {
+     public static func initialize(project_token : String)  {
         print("WlinnsTrackerClient" + project_token)
         WalinnsTrackerClient.init(token: project_token)
     }

@@ -9,17 +9,21 @@
 import Foundation
 import UIKit
 
+
 class WalinnsTrackerClient {
     var project_token : String
     
     init(token :String) {
         self.project_token = token
-        print("WalinnsTrackerClient init", project_token)
+        print("WalinnsTrackerClient init", project_token )
+        
+        
     }
     
     func getInstance(token: String){
         print("WalinnsTrackerClient", token)
     }
+    
 }
 
 
