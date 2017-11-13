@@ -15,15 +15,10 @@ class WalinnsTrackerClient {
     var project_token : String
     var device_id = UIDevice.current.identifierForVendor!.uuidString
     
-    
     init(token :String) {
         self.project_token = token
         DeviceReq()
     }
-    init() {
-        
-    }
-     
     
     func DeviceReq() {
         let jsonObject : NSMutableDictionary = NSMutableDictionary()
@@ -62,7 +57,7 @@ class WalinnsTrackerClient {
 
     }
     
-    func convertToJson(json_obj : String , service_name : String) {
+    func convertToJson(json_obj : NSMutableDictionary , service_name : String) {
         //print("JSON OBJEC" , jsonObject)
         let jsonData: NSData
         
@@ -88,6 +83,8 @@ class WalinnsTrackerClient {
         case "events":
             ApiClient().varsharedInstance(suburl: "events" ,json : jsonstring);
             break
+        default: break
+            
         }
 
     }

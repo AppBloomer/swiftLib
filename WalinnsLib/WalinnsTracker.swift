@@ -10,7 +10,7 @@
 import Foundation
 import UIKit
 
-public class WalinnsTracker: NSObject {
+public class WalinnsTracker {
 
     //sharedInstance
     static let sharedInstance = WalinnsTracker()
@@ -43,7 +43,9 @@ public class WalinnsTracker: NSObject {
 
     }
     public static func eventTrack(event_typ : String,event_nam : String){
-        WalinnsTrackerClient.init().eventTrack(event_type : event_typ ,event_name: event_nam )
+        print("event_data_token:" , Utils.init().read_pref(key: "token"))
+        WalinnsTrackerClient.init(token: "qwertyuiop123").eventTrack(event_type : event_typ ,event_name: event_nam )
+        
     }
 }
 

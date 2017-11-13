@@ -21,10 +21,25 @@ class Utils {
         // print("Current_date_time2", someDateTime)
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         formatter.timeZone = TimeZone(abbreviation: "UTC")
-       // print("Current_date_time3", formatter.string(from: someDateTime!))
+        print("Current_date_time3", formatter.string(from: someDateTime!))
         return  formatter.string(from: someDateTime!)
-
-        
+    }
+    
+    func save_pref(key : String , value : String) {
+        let preferences = UserDefaults.standard
+        preferences.set(value, forKey: key)
+        preferences.synchronize()
+    }
+    
+    func read_pref(key : String) -> String {
+        let preferences = UserDefaults.standard
+        if preferences.object(forKey: key) == nil {
+            //  Doesn't exist
+        } else {
+            let currentLevel = preferences.string(forKey: key)
+            return currentLevel!
+        }
+        return "null"
     }
     
 }
