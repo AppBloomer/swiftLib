@@ -132,7 +132,9 @@ class DeviceData {
         return "example@gmail.com"
     }
 
-    func device_model( ) -> String {
+    func device_model() -> String {
+        var systemInfo = utsname()
+        uname(&systemInfo)
         let size = MemoryLayout<CChar>.size
         let modelCode = withUnsafePointer(to: &systemInfo.machine) {
             $0.withMemoryRebound(to: CChar.self, capacity: size) {
@@ -143,10 +145,8 @@ class DeviceData {
             
             return String(model)
         }else{
-            return String("null")
+            return "no model"
         }
-        
-        
 
     }
     

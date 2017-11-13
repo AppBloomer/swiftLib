@@ -17,7 +17,7 @@ class WalinnsTrackerClient {
     init(token :String) {
         self.project_token = token
        
-        print("WalinnsTrackerClient init", project_token , ",,,,", DeviceData.init().Connectivy_gen())
+        print("WalinnsTrackerClient init", project_token , ",,,,", DeviceData.init().device_model())
         
         
     }
