@@ -7,18 +7,24 @@
 //
 
 import Foundation
+import UIKit
 
 class Utils {
     
-    func get_Date_time_from_UTC_time(string : String) -> String {
+    func getCurrentUtc() -> String {
+        let currentDateTime = Date()
+       // print("Current_date_time", currentDateTime)
+        let dt = String(describing: currentDateTime)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
+        let someDateTime = formatter.date(from: dt)
+        // print("Current_date_time2", someDateTime)
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+       // print("Current_date_time3", formatter.string(from: someDateTime!))
+        return  formatter.string(from: someDateTime!)
+
         
-        let dateformattor = DateFormatter()
-        dateformattor.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        dateformattor.timeZone = NSTimeZone.local
-        let dt = string
-        let dt1 = dateformattor.date(from: dt as String)
-        dateformattor.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ"
-        dateformattor.timeZone = NSTimeZone.init(abbreviation: "UTC") as TimeZone!
-        return dateformattor.string(from: dt1!)
     }
+    
 }

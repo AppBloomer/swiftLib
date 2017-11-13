@@ -18,14 +18,12 @@ class WalinnsTrackerClient {
     
     init(token :String) {
         self.project_token = token
-       
-        print("WalinnsTrackerClient init", project_token , ",,,,", DeviceData.init().device_model())
-        
-        
-        
         DeviceReq()
-    
     }
+    init() {
+        
+    }
+     
     
     func DeviceReq() {
         let jsonObject : NSMutableDictionary = NSMutableDictionary()
@@ -46,24 +44,58 @@ class WalinnsTrackerClient {
         jsonObject.setValue(DeviceData.init().language(), forKey: "language")
         jsonObject.setValue(DeviceData.init().location(), forKey: "country")
         jsonObject.setValue(DeviceData.init().email(), forKey: "email")
+        jsonObject.setValue(Utils.init().getCurrentUtc(),forKey: "date_time")
+        
+        convertToJson(json_obj : jsonObject ,service_name : "devices" )
         
         
+    }
+    
+    public func eventTrack(event_type : String, event_name : String) {
+        let jsonObject : NSMutableDictionary = NSMutableDictionary()
+        jsonObject.setValue(device_id, forKey: "device_id")
+        jsonObject.setValue(event_name, forKey: "event_name")
+        jsonObject.setValue(event_type, forKey: "event_type")
+        jsonObject.setValue(Utils.init().getCurrentUtc(), forKey: "date_time")
+        
+        convertToJson(json_obj : jsonObject ,service_name : "events" )
+
+    }
+    
+    func convertToJson(json_obj : String , service_name : String) {
         //print("JSON OBJEC" , jsonObject)
         let jsonData: NSData
         
         do {
-            jsonData = try JSONSerialization.data(withJSONObject: jsonObject, options: JSONSerialization.WritingOptions()) as NSData
+            jsonData = try JSONSerialization.data(withJSONObject: json_obj, options: JSONSerialization.WritingOptions()) as NSData
             let jsonString = NSString(data: jsonData as Data, encoding: String.Encoding.utf8.rawValue) as! String
-            ApiClient().varsharedInstance(suburl: "devices" ,json : jsonString);
+            api_name(type_name: service_name , jsonstring:jsonString )
+            
         } catch _ {
             print ("JSON Failure")
+            
         }
+    }
+    
+    func api_name(type_name : String , jsonstring : String) {
+        switch type_name {
+        case "devices":
+            ApiClient().varsharedInstance(suburl: "devices" ,json : jsonstring);
+            break
+        case "fetchAppUserDetail":
+           //  ApiClient().varsharedInstance(suburl: "devices" ,json : jsonstring);
+            break
+        case "events":
+            ApiClient().varsharedInstance(suburl: "events" ,json : jsonstring);
+            break
+        }
+
     }
     
 }
 
 
 
- 
 
- 
+
+
