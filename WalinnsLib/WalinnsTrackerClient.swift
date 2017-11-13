@@ -56,6 +56,15 @@ class WalinnsTrackerClient {
         convertToJson(json_obj : jsonObject ,service_name : "events" )
 
     }
+    public func screenTrack(screen_name : String) {
+        let jsonObject : NSMutableDictionary = NSMutableDictionary()
+        jsonObject.setValue(device_id, forKey: "device_id")
+        jsonObject.setValue(screen_name, forKey: "screen_name")
+        jsonObject.setValue(Utils.init().getCurrentUtc(), forKey: "date_time")
+        
+        convertToJson(json_obj : jsonObject ,service_name : "screenView" )
+        
+    }
     
     func convertToJson(json_obj : NSMutableDictionary , service_name : String) {
         //print("JSON OBJEC" , jsonObject)
@@ -77,8 +86,8 @@ class WalinnsTrackerClient {
         case "devices":
             ApiClient().varsharedInstance(suburl: "devices" ,json : jsonstring);
             break
-        case "fetchAppUserDetail":
-           //  ApiClient().varsharedInstance(suburl: "devices" ,json : jsonstring);
+        case "screenView":
+            ApiClient().varsharedInstance(suburl: "screenView" ,json : jsonstring);
             break
         case "events":
             ApiClient().varsharedInstance(suburl: "events" ,json : jsonstring);

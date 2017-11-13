@@ -44,7 +44,17 @@ public class WalinnsTracker {
     }
     public static func eventTrack(event_typ : String,event_nam : String){
         print("event_data_token:" , Utils.init().read_pref(key: "token"))
-        WalinnsTrackerClient.init(token: "qwertyuiop123").eventTrack(event_type : event_typ ,event_name: event_nam )
+        if(Utils.init().read_pref(key: "token") != nil){
+        WalinnsTrackerClient.init(token: Utils.init().read_pref(key: "token")).eventTrack(event_type : event_typ ,event_name: event_nam )
+        }
+        
+    }
+    
+    public static func ScreenTrack(screenName : String){
+        
+        if(Utils.init().read_pref(key: "token") != nil){
+            WalinnsTrackerClient.init(token: Utils.init().read_pref(key: "token")).screenTrack(screen_name : screenName)
+        }
         
     }
 }
