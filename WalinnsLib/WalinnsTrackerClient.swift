@@ -14,10 +14,11 @@ class WalinnsTrackerClient {
     
     var project_token : String
     var device_id = UIDevice.current.identifierForVendor!.uuidString
+    public var timer: Timer?
     
     init(token :String) {
         self.project_token = token
-        DeviceReq()
+         DeviceReq()
     }
     
     func DeviceReq() {
@@ -97,7 +98,40 @@ class WalinnsTrackerClient {
         }
 
     }
+    func start() {
+        guard timer == nil else { return }
+        timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(handleMyFunction), userInfo: nil, repeats: true)
+    }
+    func stop() {
+        guard timer != nil else { return }
+        timer?.invalidate()
+        timer = nil
+    }
     
+    
+    @objc func handleMyFunction() {
+        // Code here
+         print("Timer started client",Date())
+        DispatchQueue.global(qos: .background).async {
+            print("This is run on the background queue")
+            
+            DispatchQueue.main.async {
+                print("Timer started","This is run on the main queue, after the previous code in outer block")
+                switch UIApplication.shared.applicationState {
+                case .active:
+                    print("Timer started","Device status :" , "active")
+                case .background:
+                    print("Timer started","Device status :" , "bg")
+                    print("Background time remaining = \(UIApplication.shared.backgroundTimeRemaining) seconds")
+                    self.stop()
+                case .inactive:
+                    break
+                }
+            }
+        }
+
+    }
+      
 }
 
 
