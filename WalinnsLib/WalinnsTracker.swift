@@ -9,15 +9,19 @@
 
 import Foundation
 import UIKit
+import CoreData
 
-public class WalinnsTracker {
+public class WalinnsTracker :UIResponder, UIApplicationDelegate {
 
     //sharedInstance
     static let sharedInstance = WalinnsTracker()
     
+    
+    
      public static func initialize(project_token : String)  {
         print("WlinnsTrackerClient" + project_token)
         WalinnsTrackerClient.init(token: project_token)
+        
         
      }
     
@@ -57,6 +61,15 @@ public class WalinnsTracker {
             WalinnsTrackerClient.init(token: Utils.init().read_pref(key: "token")).screenTrack(screen_name : screenName)
         }
         
+    }
+    public func applicationDidBecomeActive(_ application: UIApplication) {
+        print("App state :", "becomeActive")
+    }
+    public func applicationDidEnterBackground(_ application: UIApplication) {
+         print("App state :", "enterBackground")
+    }
+    public func applicationWillResignActive(_ application: UIApplication) {
+        print("App state :", "ResignActive")
     }
 }
 

@@ -21,3 +21,5 @@ protocol AppLifecycle {
     func applicationDidBecomeActive()
     func applicationWillResignActive()
 }
+
+
