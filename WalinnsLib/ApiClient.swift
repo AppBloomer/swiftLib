@@ -21,7 +21,7 @@ class ApiClient : NSObject{
     }
     
     
-    var url_base = "http://192.168.0.11:8083/"
+    var url_base = "http://192.168.0.12:8083/"
     func postRequest (api: String,jsonString : String, parameters: [String: Any]? = nil) {
         print("Passed value_inside_loop:", api , url_base )
         guard let destination = URL(string: url_base + api) else { return }
@@ -40,7 +40,9 @@ class ApiClient : NSObject{
                         print("Http_response_","Http_response_","1234")
                         if(api == "devices"){
                             print("DEVice_api-sucess" , api)
-                        Utils.init().save_pref(key: "token" , value: "qwertyuiop123")
+                            Utils.init().save_pref(key: "token" , value: "qwertyuiop123")
+                        }else if(api == "session"){
+                            Utils.init().save_pref(key: "session" , value: "end")
                         }
                     } else {
                         print("Http_response_","ABCD")

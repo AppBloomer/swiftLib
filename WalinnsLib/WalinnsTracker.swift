@@ -16,13 +16,10 @@ public class WalinnsTracker {
     //sharedInstance
     static let sharedInstance = WalinnsTracker()
     
-    
-    
      public static func initialize(project_token : String)  {
         print("WlinnsTrackerClient" + project_token)
         WalinnsTrackerClient.init(token: project_token)
-        //WalinnsTrackerClient.init(token: project_token).start()
-          UIApplication.shared.delegate as? AppState
+        WalinnsTrackerClient.init(token: project_token).start()
      }
     
     func start(project_token : String)  {
@@ -50,7 +47,7 @@ public class WalinnsTracker {
     public static func eventTrack(event_typ : String,event_nam : String){
         print("event_data_token:" , Utils.init().read_pref(key: "token"))
         if(Utils.init().read_pref(key: "token") != nil){
-        WalinnsTrackerClient.init(token: Utils.init().read_pref(key: "token")).eventTrack(event_type : event_typ ,event_name: event_nam )
+          WalinnsTrackerClient.init(token: Utils.init().read_pref(key: "token")).eventTrack(event_type : event_typ ,event_name: event_nam )
         }
         
     }

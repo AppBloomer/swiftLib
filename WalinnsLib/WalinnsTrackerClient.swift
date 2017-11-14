@@ -15,10 +15,17 @@ class WalinnsTrackerClient {
     var project_token : String
     var device_id = UIDevice.current.identifierForVendor!.uuidString
     public var timer: Timer?
+    var sessionStartTime: TimeInterval = Date().timeIntervalSince1970
+    var sessionLength: TimeInterval = 0
+    var sessionEndTime: TimeInterval = 0
+    var start_time : String = Utils.init().getCurrentUtc()
+    var end_time : String = ""
+    var flag : String = "na"
+    
     
     init(token :String) {
         self.project_token = token
-         DeviceReq()
+        DeviceReq()
     }
     
     func DeviceReq() {
@@ -93,6 +100,10 @@ class WalinnsTrackerClient {
         case "events":
             ApiClient().varsharedInstance(suburl: "events" ,json : jsonstring);
             break
+        case "session":
+            ApiClient().varsharedInstance(suburl: "session" ,json : jsonstring);
+            break
+            
         default: break
             
         }
@@ -111,19 +122,33 @@ class WalinnsTrackerClient {
     
     @objc func handleMyFunction() {
         // Code here
-         print("Timer started client",Date())
+         //print("Timer started client",Date())
         DispatchQueue.global(qos: .background).async {
             print("This is run on the background queue")
             
             DispatchQueue.main.async {
-                print("Timer started","This is run on the main queue, after the previous code in outer block")
+                
                 switch UIApplication.shared.applicationState {
                 case .active:
                     print("Timer started","Device status :" , "active")
+                    self.appUserStatus(app_status : "yes")
                 case .background:
                     print("Timer started","Device status :" , "bg")
-                    print("Background time remaining = \(UIApplication.shared.backgroundTimeRemaining) seconds")
-                    self.stop()
+                    if(self.flag == "na"){
+                       self.sessionEndTime = Date().timeIntervalSince1970
+                       self.end_time = Utils.init().getCurrentUtc()
+                       self.sessionLength = self.roundOneDigit(num: self.sessionEndTime - self.sessionStartTime)
+                       print("Timer started session length",self.sessionLength ,"start_time: ",self.sessionStartTime)
+                       self.flag == "end"
+                       self.sessionTrack(start_timee :self.start_time,end_time :self.end_time,session_lenth:self.sessionLength)
+                        self.appUserStatus(app_status : "no")
+                    }
+                    
+                    if(Utils.init().read_pref(key: "session") != nil && Utils.init().read_pref(key: "session") == "end" ){
+                        self.stop()
+                    }
+                   
+                    
                 case .inactive:
                     break
                 }
@@ -131,7 +156,30 @@ class WalinnsTrackerClient {
         }
 
     }
-      
+    func roundOneDigit(num: TimeInterval) -> TimeInterval {
+        return round(num * 10.0) / 10.0
+    }
+    public func sessionTrack(start_timee : String , end_time : String , session_lenth : Double){
+        
+        print("Timer started Device",self.flag,"Session track data :" , start_timee , end_time, session_lenth)
+        let jsonObject : NSMutableDictionary = NSMutableDictionary()
+        jsonObject.setValue(device_id, forKey: "device_id")
+        jsonObject.setValue(String(format:"%f", session_lenth), forKey: "sessionlength")
+        jsonObject.setValue(start_timee, forKey: "start_time")
+        jsonObject.setValue(end_time, forKey: "end_time")
+        
+        convertToJson(json_obj : jsonObject ,service_name : "session" )
+        
+    }
+    
+    public func appUserStatus(app_status : String){
+        let jsonObject : NSMutableDictionary = NSMutableDictionary()
+        jsonObject.setValue(device_id, forKey: "device_id")
+        jsonObject.setValue(app_status, forKey: "active_status")
+        jsonObject.setValue(Utils.init().getCurrentUtc(), forKey: "date_time")
+        convertToJson(json_obj : jsonObject ,service_name : "fetchAppUserDetails" )
+    }
+    
 }
 
 
