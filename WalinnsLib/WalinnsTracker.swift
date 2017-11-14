@@ -60,8 +60,5 @@ public class WalinnsTracker {
     }
 }
 
-protocol AppLifecycle {
-    func applicationDidBecomeActive()
-    func applicationWillResignActive()
-}
+
 
