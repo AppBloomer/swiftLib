@@ -40,6 +40,7 @@ public class WalinnsTracker {
                 }
             }
         }
+        
 
     }
     public static func eventTrack(event_typ : String,event_nam : String){
@@ -59,4 +60,8 @@ public class WalinnsTracker {
     }
 }
 
+protocol AppLifecycle {
+    func applicationDidBecomeActive()
+    func applicationWillResignActive()
+}
 
