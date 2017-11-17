@@ -12,9 +12,11 @@ import UIKit
 import CoreData
 
 public class WalinnsTracker {
- 
+
     //sharedInstance
     static let sharedInstance = WalinnsTracker()
+    public static var flag : String = "na"
+    public static var flag_1 : String = "na"
     
      public static func initialize(project_token : String)  {
         print("WlinnsTrackerClient" + project_token)
