@@ -164,7 +164,7 @@ class WalinnsTrackerClient {
         print("Timer started Device",self.flag,"Session track data :" , start_timee , end_time, session_lenth)
         let jsonObject : NSMutableDictionary = NSMutableDictionary()
         jsonObject.setValue(device_id, forKey: "device_id")
-        jsonObject.setValue(String(format:"%f", session_lenth), forKey: "sessionlength")
+        jsonObject.setValue(String(format:"%f", session_lenth), forKey: "session_length")
         jsonObject.setValue(start_timee, forKey: "start_time")
         jsonObject.setValue(end_time, forKey: "end_time")
         

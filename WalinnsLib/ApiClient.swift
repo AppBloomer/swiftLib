@@ -37,7 +37,7 @@ class ApiClient : NSObject{
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
                     if (json["response"]) != nil {
-                        print("Http_response_","Http_response_","1234")
+                        print("Http_response_","Http_response_","1234",api)
                         if(api == "devices"){
                             print("DEVice_api-sucess" , api)
                             Utils.init().save_pref(key: "token" , value: "qwertyuiop123")
