@@ -81,33 +81,59 @@ class WalinnsTrackerClient {
         do {
             jsonData = try JSONSerialization.data(withJSONObject: json_obj, options: JSONSerialization.WritingOptions()) as NSData
             let jsonString = NSString(data: jsonData as Data, encoding: String.Encoding.utf8.rawValue) as! String
-            api_name(type_name: service_name , jsonstring:jsonString )
+            api_name(type_name: service_name , jsonstring:jsonString , flag: "na")
             
         } catch _ {
             print ("JSON Failure")
             
         }
     }
-    
-    func api_name(type_name : String , jsonstring : String) {
+    func convertToJson(json_obj : NSMutableDictionary , service_name : String , flag_status : String) {
+        //print("JSON OBJEC" , jsonObject)
+        let jsonData: NSData
+        
+        do {
+            jsonData = try JSONSerialization.data(withJSONObject: json_obj, options: JSONSerialization.WritingOptions()) as NSData
+            let jsonString = NSString(data: jsonData as Data, encoding: String.Encoding.utf8.rawValue) as! String
+            api_name(type_name: service_name , jsonstring:jsonString , flag: flag_status)
+            
+        } catch _ {
+            print ("JSON Failure")
+            
+        }
+    }
+    func api_name(type_name : String , jsonstring : String , flag : String) {
         switch type_name {
         case "devices":
-            ApiClient().varsharedInstance(suburl: "devices" ,json : jsonstring);
+            ApiClient().varsharedInstance(suburl: "devices" ,json : jsonstring, flag_status: flag);
             break
         case "screenView":
-            ApiClient().varsharedInstance(suburl: "screenView" ,json : jsonstring);
+            
+            
+            ApiClient().varsharedInstance(suburl: "screenView" ,json : jsonstring, flag_status: flag);
             break
         case "events":
-            ApiClient().varsharedInstance(suburl: "events" ,json : jsonstring);
+            ApiClient().varsharedInstance(suburl: "events" ,json : jsonstring, flag_status: flag);
             break
         case "session":
-            ApiClient().varsharedInstance(suburl: "session" ,json : jsonstring);
+            ApiClient().varsharedInstance(suburl: "session" ,json : jsonstring, flag_status: flag);
+            break
+        case "fetchAppUserDetail":
+            print("Fetch app user details :" , jsonstring)
+            if(flag == "fetch_no"){
+                ApiClient().varsharedInstance(suburl: "fetchAppUserDetail" ,json : jsonstring , flag_status: flag);
+            }else{
+                ApiClient().varsharedInstance(suburl: "fetchAppUserDetail" ,json : jsonstring, flag_status: flag);
+            }
+            break
+        case "uninstallCount":
+              ApiClient().varsharedInstance(suburl: "uninstallCount" ,json : jsonstring, flag_status: flag);
             break
             
         default: break
             
         }
-
+        
     }
     func start() {
         guard timer == nil else { return }
@@ -122,7 +148,7 @@ class WalinnsTrackerClient {
     
     @objc func handleMyFunction() {
         // Code here
-         //print("Timer started client",Date())
+        //print("Timer started client",Date())
         DispatchQueue.global(qos: .background).async {
             print("This is run on the background queue")
             
@@ -130,54 +156,81 @@ class WalinnsTrackerClient {
                 
                 switch UIApplication.shared.applicationState {
                 case .active:
-                    print("Timer started","Device status :" , "active")
-                    self.appUserStatus(app_status : "yes")
+                    print("Timer started","Device status :" , "active" , WalinnsTracker.flag_1)
+                    if(WalinnsTracker.flag_1 == "na"){
+                        self.DeviceReq()
+                    }else if(WalinnsTracker.flag_1 == "active_status"){
+                        self.appUserStatus(app_status : "yes")
+                    }
+                    
                 case .background:
-                    print("Timer started","Device status :" , "bg")
-                    if(self.flag == "na"){
-                       self.sessionEndTime = Date().timeIntervalSince1970
-                       self.end_time = Utils.init().getCurrentUtc()
-                       self.sessionLength = self.roundOneDigit(num: self.sessionEndTime - self.sessionStartTime)
-                       print("Timer started session length",self.sessionLength ,"start_time: ",self.sessionStartTime)
-                       self.flag == "end"
-                       self.sessionTrack(start_timee :self.start_time,end_time :self.end_time,session_lenth:self.sessionLength)
+                    print("Timer started","Device status :" , "bg", WalinnsTracker.flag)
+                    if(WalinnsTracker.flag == "na"){
+                        self.sessionEndTime = Date().timeIntervalSince1970
+                        self.end_time = Utils.init().getCurrentUtc()
+                        self.sessionLength = self.roundOneDigit(num: self.sessionEndTime - self.sessionStartTime)
+                        print("Timer started session length",self.sessionLength ,"start_time: ",self.sessionStartTime)
+                        self.sessionTrack(start_timee :self.start_time,end_time :self.end_time,session_lenth:self.sessionLength)
+                        
+                    }else if(WalinnsTracker.flag == "session"){
                         self.appUserStatus(app_status : "no")
                     }
                     
-                    if(Utils.init().read_pref(key: "session") != nil && Utils.init().read_pref(key: "session") == "end" ){
-                        self.stop()
+                    if(WalinnsTracker.flag == "timer_end"){
+                        if(Utils.init().read_pref(key: "session") != nil && Utils.init().read_pref(key: "session") == "end" ){
+                            print("Timer started","Device status stop :" , "bg", Utils.init().read_pref(key: "session"))
+                            self.stop()
+                        }
                     }
-                   
+                    
                     
                 case .inactive:
+                    print("Timer started","Device status :" , "inactive", WalinnsTracker.flag)
                     break
                 }
             }
         }
-
+        
     }
     func roundOneDigit(num: TimeInterval) -> TimeInterval {
         return round(num * 10.0) / 10.0
     }
     public func sessionTrack(start_timee : String , end_time : String , session_lenth : Double){
         
-        print("Timer started Device",self.flag,"Session track data :" , start_timee , end_time, session_lenth)
+        print("Timer started Device",WalinnsTracker.flag,"Session track data :" , start_timee , end_time, session_lenth)
         let jsonObject : NSMutableDictionary = NSMutableDictionary()
         jsonObject.setValue(device_id, forKey: "device_id")
         jsonObject.setValue(String(format:"%f", session_lenth), forKey: "session_length")
         jsonObject.setValue(start_timee, forKey: "start_time")
         jsonObject.setValue(end_time, forKey: "end_time")
-        
+        print("WalinnsTrackerClient session:", jsonObject )
         convertToJson(json_obj : jsonObject ,service_name : "session" )
         
     }
-    
     public func appUserStatus(app_status : String){
+        
         let jsonObject : NSMutableDictionary = NSMutableDictionary()
         jsonObject.setValue(device_id, forKey: "device_id")
         jsonObject.setValue(app_status, forKey: "active_status")
         jsonObject.setValue(Utils.init().getCurrentUtc(), forKey: "date_time")
-        convertToJson(json_obj : jsonObject ,service_name : "fetchAppUserDetails" )
+        print("WalinnsTrackerClient App user status:", app_status )
+        if(app_status == "yes"){
+            print("WalinnsTrackerClient App user status if:", app_status )
+            convertToJson(json_obj : jsonObject ,service_name : "fetchAppUserDetail" )
+        }else{
+            print("WalinnsTrackerClient App user status else:", app_status )
+            convertToJson(json_obj : jsonObject ,service_name : "fetchAppUserDetail", flag_status : "fetch_no")
+        }
+    }
+    public func appUninstallCount(pushToken : String){
+        let bundleIdentifier =  Bundle.main.bundleIdentifier
+        print("Bundle identifier :" , bundleIdentifier)
+        let jsonObject : NSMutableDictionary = NSMutableDictionary()
+        jsonObject.setValue(device_id, forKey: "device_id")
+        jsonObject.setValue(bundleIdentifier, forKey: "package_name")
+        jsonObject.setValue(pushToken, forKey: "push_token")
+        jsonObject.setValue(Utils.init().getCurrentUtc(), forKey: "date_time")
+        convertToJson(json_obj : jsonObject ,service_name : "uninstallCount" )
     }
     
 }

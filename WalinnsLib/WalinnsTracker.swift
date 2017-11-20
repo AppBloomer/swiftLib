@@ -15,6 +15,8 @@ public class WalinnsTracker {
  
     //sharedInstance
     static let sharedInstance = WalinnsTracker()
+    public static var flag : String = "na"
+    public static var flag_1 : String = "na"
     
      public static func initialize(project_token : String)  {
         print("WlinnsTrackerClient" + project_token)
@@ -58,6 +60,15 @@ public class WalinnsTracker {
             WalinnsTrackerClient.init(token: Utils.init().read_pref(key: "token")).screenTrack(screen_name : screenName)
         }
         
+    }
+    
+    public static func sendPushToken(push_token : String){
+        if(push_token != nil){
+            print("send push token :" , push_token)
+            if(Utils.init().read_pref(key: "token") != nil){
+            WalinnsTrackerClient.init(token: Utils.init().read_pref(key: "token")).appUninstallCount(pushToken: push_token)
+            }
+        }
     }
   
 }
