@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import CoreTelephony
+import Contacts
+import CloudKit
 
 class DeviceData {
     public var connectivty : String = ""
@@ -33,13 +35,15 @@ class DeviceData {
         }
         return version
     }
-//    func carrierName() -> String {
-//        let networkInfoo = CTTelephonyNetworkInfo()
-//        let carrier = networkInfoo.subscriberCellularProvider
-//        let carrierval  = carrier?.carrierName
-//        
-//        return carrierval!
-//    }
+    func carrierName() -> String {
+      let telephonyInfo = CTTelephonyNetworkInfo()
+       let carrier = telephonyInfo.subscriberCellularProvider?.carrierName
+        print("Carrierr name: " , carrier)
+        if(carrier != nil){
+            return carrier!
+        }
+        return "No sim"
+    }
     
     func Connectivy_gen() -> String {
         let networkInfoo = CTTelephonyNetworkInfo()
@@ -124,12 +128,25 @@ class DeviceData {
     
     func location( ) -> String {
         
-        return "IN"
+        if let countryCode = (Locale.current as NSLocale).object(forKey: .countryCode) as? String {
+            print("get country code :",countryCode)
+             return countryCode
+        }else{
+             print("get country code else:","")
+             return "IN"
+        }
+        
         
     }
     
     func email() -> String {
-        return "example@gmail.com"
+       //  iCloudUserIDAsync { (recordID: CKRecordID?, error: NSError?) in
+//if let userID = recordID?.recordName {
+       // print("received iCloudID \(userID)")
+        //    print("Fetched iCloudID was nil")
+         //  }
+        //}
+        return getEmail()
     }
 
     func device_model() -> String {
@@ -142,13 +159,43 @@ class DeviceData {
             }
         }
         if let model = String(validatingUTF8: modelCode) {
-            
+            print("Phone model : " , model)
             return String(model)
         }else{
+            print("Phone model else : " , "unknown")
             return "no model"
         }
 
     }
     
+    func getEmail() -> String {
+        let contactStore = CNContactStore()
+        do {
+            try contactStore.enumerateContacts(with: CNContactFetchRequest(keysToFetch: [CNContactGivenNameKey as CNKeyDescriptor, CNContactFamilyNameKey as CNKeyDescriptor, CNContactEmailAddressesKey as CNKeyDescriptor])) {
+                (contact, cursor) -> Void in
+                if (!contact.emailAddresses.isEmpty){
+                    //Add to your array
+                    print("Contact Details : " , contact.emailAddresses)
+                }
+            }
+        }
+        catch{
+            print("Handle the error please")
+        }
+        return "email"
+    }
+    func iCloudUserIDAsync(complete: @escaping (_ instance: CKRecordID?, _ error: NSError?) -> ()) {
+        
+        CKContainer.default().requestApplicationPermission(.userDiscoverability) { (status, error) in
+            CKContainer.default().fetchUserRecordID { (record, error) in
+                CKContainer.default().discoverUserIdentity(withUserRecordID: record!, completionHandler: { (userID, error) in
+                    print(userID?.hasiCloudAccount)
+                    print(userID?.lookupInfo?.phoneNumber)
+                    print(userID?.lookupInfo?.emailAddress)
+                    print((userID?.nameComponents?.givenName)! + " " + (userID?.nameComponents?.familyName)!)
+                })
+            }
+        }
+    }
     
 }

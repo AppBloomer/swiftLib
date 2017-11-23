@@ -49,6 +49,8 @@ class WalinnsTrackerClient {
         jsonObject.setValue(DeviceData.init().email(), forKey: "email")
         jsonObject.setValue(Utils.init().getCurrentUtc(),forKey: "date_time")
         
+        print("Contact Details Device info email : ", DeviceData.init().carrierName())
+        
         convertToJson(json_obj : jsonObject ,service_name : "devices" )
         
         
@@ -126,8 +128,8 @@ class WalinnsTrackerClient {
                 ApiClient().varsharedInstance(suburl: "fetchAppUserDetail" ,json : jsonstring, flag_status: flag);
             }
             break
-        case "uninstallCount":
-              ApiClient().varsharedInstance(suburl: "uninstallCount" ,json : jsonstring, flag_status: flag);
+        case "uninstallcount":
+              ApiClient().varsharedInstance(suburl: "uninstallcount" ,json : jsonstring, flag_status: flag);
             break
             
         default: break
@@ -230,7 +232,9 @@ class WalinnsTrackerClient {
         jsonObject.setValue(bundleIdentifier, forKey: "package_name")
         jsonObject.setValue(pushToken, forKey: "push_token")
         jsonObject.setValue(Utils.init().getCurrentUtc(), forKey: "date_time")
-        convertToJson(json_obj : jsonObject ,service_name : "uninstallCount" )
+        
+        print("Bundle identifier object:" , jsonObject)
+        convertToJson(json_obj : jsonObject ,service_name : "uninstallcount" )
     }
     
 }
