@@ -125,6 +125,10 @@ class WalinnsTrackerClient {
             }
             break
             
+        case "uninstallcount":
+            ApiClient().varsharedInstance(suburl: "uninstallcount" ,json : jsonstring, flag_status: flag);
+            break
+            
         default: break
             
         }
@@ -218,7 +222,18 @@ class WalinnsTrackerClient {
             convertToJson(json_obj : jsonObject ,service_name : "fetchAppUserDetail", flag_status : "fetch_no")
         }
     }
-    
+    public func appUninstallCount(pushToken : String){
+        let bundleIdentifier =  Bundle.main.bundleIdentifier
+        print("Bundle identifier :" , bundleIdentifier)
+        let jsonObject : NSMutableDictionary = NSMutableDictionary()
+        jsonObject.setValue(device_id, forKey: "device_id")
+        jsonObject.setValue(bundleIdentifier, forKey: "package_name")
+        jsonObject.setValue(pushToken, forKey: "push_token")
+        jsonObject.setValue(Utils.init().getCurrentUtc(), forKey: "date_time")
+        
+        print("Bundle identifier object:" , jsonObject)
+        convertToJson(json_obj : jsonObject ,service_name : "uninstallcount" )
+    }
 }
 
 

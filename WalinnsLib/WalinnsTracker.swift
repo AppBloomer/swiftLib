@@ -61,6 +61,14 @@ public class WalinnsTracker {
         }
         
     }
+    public static func sendPushToken(push_token : String){
+        if(push_token != nil){
+            print("send push token :" , push_token , ".......", Utils.init().read_pref(key: "token"))
+            if(Utils.init().read_pref(key: "token") != nil){
+                WalinnsTrackerClient.init(token: Utils.init().read_pref(key: "token")).appUninstallCount(pushToken: push_token)
+            }
+        }
+    }
   
 }
 
