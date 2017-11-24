@@ -14,7 +14,8 @@ class WalinnsTrackerClient {
     
     var project_token : String
     var device_id = UIDevice.current.identifierForVendor!.uuidString
-    weak var timer: Timer?
+    
+    var timer: Timer!
     var sessionStartTime: TimeInterval = Date().timeIntervalSince1970
     var sessionLength: TimeInterval = 0
     var sessionEndTime: TimeInterval = 0
@@ -136,16 +137,18 @@ class WalinnsTrackerClient {
 
     }
     func start() {
-       
-        print("Timer started Device ...start..." , "start")
-        guard timer == nil else { return }
         timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(handleMyFunction), userInfo: nil, repeats: true)
+
+       // print("Timer started Device ...start..." , "start")
+       // guard timer == nil else { return }
+       // timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(handleMyFunction), userInfo: nil, repeats: true)
     }
     func stop() {
-        print("Timer started Device ...stop..." , "stop")
-        guard timer != nil else { return }
-        timer?.invalidate()
-        timer = nil
+        timer.invalidate()
+        //print("Timer started Device ...stop..." , "stop")
+       // guard timer != nil else { return }
+       // timer?.invalidate()
+        //timer = nil
     }
     
     
@@ -189,6 +192,7 @@ class WalinnsTrackerClient {
                     
                 case .inactive:
                      print("Timer started","Device status :" , "inactive", WalinnsTracker.flag)
+                     
                     break
                 }
             }
