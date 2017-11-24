@@ -20,7 +20,9 @@ public class WalinnsTracker {
     
      public static func initialize(project_token : String)  {
         print("WlinnsTrackerClient" + project_token)
-        WalinnsTrackerClient.init(token: project_token)
+        
+        
+ 
         WalinnsTrackerClient.init(token: project_token).start()
      }
     

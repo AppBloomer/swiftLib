@@ -28,7 +28,7 @@ class ApiClient : NSObject{
         return (singleton.sharedInstance)
     }
     
-    var url_base = "http://192.168.0.09:8083/"
+    var url_base = "http://192.168.0.05:8083/"
     func postRequest (api: String,jsonString : String, parameters: [String: Any]? = nil) {
         
         guard let destination = URL(string: url_base + api) else { return }
@@ -44,8 +44,7 @@ class ApiClient : NSObject{
                 do {
                     let json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
                     if (json["response"]) != nil {
-                        print("Flag Status response" , api , self.flagval)
-                      
+                        Logger.e(messing: "Flag Status response :"+api+"   flag..: "+self.flagval)
                         if(self.flagval == "na"){
                             self.api_call(falg_status: api)
                         }else{

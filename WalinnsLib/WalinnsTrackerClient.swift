@@ -14,7 +14,7 @@ class WalinnsTrackerClient {
     
     var project_token : String
     var device_id = UIDevice.current.identifierForVendor!.uuidString
-    public var timer: Timer?
+    weak var timer: Timer?
     var sessionStartTime: TimeInterval = Date().timeIntervalSince1970
     var sessionLength: TimeInterval = 0
     var sessionEndTime: TimeInterval = 0
@@ -28,6 +28,7 @@ class WalinnsTrackerClient {
     }
     
     func DeviceReq() {
+         
         let jsonObject : NSMutableDictionary = NSMutableDictionary()
         jsonObject.setValue(device_id, forKey: "device_id")
         jsonObject.setValue(DeviceData.init().device_model(), forKey: "device_model")
@@ -135,10 +136,13 @@ class WalinnsTrackerClient {
 
     }
     func start() {
+       
+        print("Timer started Device ...start..." , "start")
         guard timer == nil else { return }
-        timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(handleMyFunction), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(handleMyFunction), userInfo: nil, repeats: true)
     }
     func stop() {
+        print("Timer started Device ...stop..." , "stop")
         guard timer != nil else { return }
         timer?.invalidate()
         timer = nil
@@ -149,7 +153,7 @@ class WalinnsTrackerClient {
         // Code here
          //print("Timer started client",Date())
         DispatchQueue.global(qos: .background).async {
-            print("This is run on the background queue")
+            print("This is run on the background queue" , WalinnsTracker.flag_1+"......")
             
             DispatchQueue.main.async {
                 
@@ -175,10 +179,10 @@ class WalinnsTrackerClient {
                         self.appUserStatus(app_status : "no")
                     }
                     
-                    if(WalinnsTracker.flag == "timer_end"){
+                    if(WalinnsTracker.flag == "timer_end" ){
                     if(Utils.init().read_pref(key: "session") != nil && Utils.init().read_pref(key: "session") == "end" ){
                         print("Timer started","Device status stop :" , "bg", Utils.init().read_pref(key: "session"))
-                        self.stop()
+                         self.stop()
                     }
                     }
                    
@@ -191,6 +195,7 @@ class WalinnsTrackerClient {
         }
 
     }
+   
     func roundOneDigit(num: TimeInterval) -> TimeInterval {
         return round(num * 10.0) / 10.0
     }
