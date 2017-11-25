@@ -28,7 +28,7 @@ class ApiClient : NSObject{
         return (singleton.sharedInstance)
     }
     
-    var url_base = "http://192.168.0.05:8083/"
+    var url_base = "http://192.168.0.17:8083/"
     func postRequest (api: String,jsonString : String, parameters: [String: Any]? = nil) {
         
         guard let destination = URL(string: url_base + api) else { return }

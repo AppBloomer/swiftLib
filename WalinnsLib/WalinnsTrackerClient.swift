@@ -37,7 +37,7 @@ class WalinnsTrackerClient {
         jsonObject.setValue(DeviceData.init().os_version(), forKey: "os_version")
         jsonObject.setValue(DeviceData.init().app_version(), forKey: "app_version")
         jsonObject.setValue(DeviceData.init().Connectivy_gen(), forKey: "connectivity")
-        jsonObject.setValue("no sim", forKey: "carrier")
+        jsonObject.setValue(DeviceData.init().carrierName(), forKey: "carrier")
         jsonObject.setValue("false", forKey: "play_service")
         jsonObject.setValue("false", forKey: "bluetooth")
         jsonObject.setValue(DeviceData.init().screendpi(), forKey: "screen_dpi")

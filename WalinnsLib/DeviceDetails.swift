@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreTelephony
 
+
 class DeviceData {
     public var connectivty : String = ""
     
@@ -33,13 +34,13 @@ class DeviceData {
         }
         return version
     }
-//    func carrierName() -> String {
-//        let networkInfoo = CTTelephonyNetworkInfo()
-//        let carrier = networkInfoo.subscriberCellularProvider
-//        let carrierval  = carrier?.carrierName
-//        
-//        return carrierval!
-//    }
+   func carrierName() -> String {
+        let networkInfoo = CTTelephonyNetworkInfo()
+        let carrier = networkInfoo.subscriberCellularProvider
+        let carrierval  = carrier?.carrierName
+    
+        return carrierval!
+    }
     
     func Connectivy_gen() -> String {
         let networkInfoo = CTTelephonyNetworkInfo()
@@ -108,7 +109,8 @@ class DeviceData {
     }
     
     func screendpi() -> String {
-        return "1250"
+        let ppi = UIScreen.main.bounds       // #> 326]
+        return String(describing: ppi)
     }
     
     func age() -> String {
