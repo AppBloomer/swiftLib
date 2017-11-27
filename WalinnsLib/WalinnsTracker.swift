@@ -14,23 +14,25 @@ import CoreFoundation
 import NotificationCenter
 
 
-public class WalinnsTracker {
+public class WalinnsTracker : NSObject{
    
     //sharedInstance
     static let sharedInstance = WalinnsTracker()
     public static var flag : String = "na"
     public static var flag_1 : String = "na"
+  
+  
    
-    
-    
-    public let app_delegate : UIApplicationDelegate
-    public static func initialize(project_token : String)  {
+    public static func initialize(project_token : String, viewController : UIViewController)  {
         print("WlinnsTrackerClient" + project_token)
-        
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(viewController, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
         WalinnsTrackerClient.init(token: project_token).start()
         
      }
-    
+    @objc func appMovedToBackground() {
+        print("App moved to background!")
+    }
     func start(project_token : String)  {
         print(project_token)
         DispatchQueue.global(qos: .background).async {

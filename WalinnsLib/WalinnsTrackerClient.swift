@@ -21,13 +21,10 @@ class WalinnsTrackerClient {
     var sessionEndTime: TimeInterval = 0
     var start_time : String = Utils.init().getCurrentUtc()
     var end_time : String = ""
-    let app_delgate : UIApplicationDelegate
-    
+ 
     
     init(token :String ) {
         self.project_token = token
-        
-        
     }
     
     func DeviceReq() {
