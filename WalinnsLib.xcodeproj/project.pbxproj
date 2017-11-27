@@ -13,6 +13,7 @@
 		7738278E1FA99D7600A22F97 /* WalinnsLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 773827801FA99D7400A22F97 /* WalinnsLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		773827981FA99DA200A22F97 /* WalinnsTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773827971FA99DA200A22F97 /* WalinnsTracker.swift */; };
 		7738279A1FA99DB700A22F97 /* WalinnsTrackerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773827991FA99DB700A22F97 /* WalinnsTrackerClient.swift */; };
+		77785C6D1FCBEFDE00933925 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77785C6C1FCBEFDE00933925 /* GoogleService-Info.plist */; };
 		893A95F270ADE7B268D93C21 /* Pods_WalinnsLibTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED506757A3E8D9B8927F8811 /* Pods_WalinnsLibTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		7738278D1FA99D7600A22F97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		773827971FA99DA200A22F97 /* WalinnsTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalinnsTracker.swift; sourceTree = "<group>"; };
 		773827991FA99DB700A22F97 /* WalinnsTrackerClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalinnsTrackerClient.swift; sourceTree = "<group>"; };
+		77785C6C1FCBEFDE00933925 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B23245785E27A2EFB2CCB550 /* Pods-WalinnsLibTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalinnsLibTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalinnsLibTests/Pods-WalinnsLibTests.release.xcconfig"; sourceTree = "<group>"; };
 		D99234C21274FB9D15324FF6 /* Pods-WalinnsLib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalinnsLib.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalinnsLib/Pods-WalinnsLib.release.xcconfig"; sourceTree = "<group>"; };
 		ED506757A3E8D9B8927F8811 /* Pods_WalinnsLibTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalinnsLibTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				773827801FA99D7400A22F97 /* WalinnsLib.h */,
+				77785C6C1FCBEFDE00933925 /* GoogleService-Info.plist */,
 				773827811FA99D7600A22F97 /* Info.plist */,
 				773827971FA99DA200A22F97 /* WalinnsTracker.swift */,
 				773827991FA99DB700A22F97 /* WalinnsTrackerClient.swift */,
@@ -223,6 +226,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77785C6D1FCBEFDE00933925 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,6 +546,7 @@
 				773827931FA99D7600A22F97 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		773827941FA99D7600A22F97 /* Build configuration list for PBXNativeTarget "WalinnsLibTests" */ = {
 			isa = XCConfigurationList;
@@ -550,6 +555,7 @@
 				773827961FA99D7600A22F97 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

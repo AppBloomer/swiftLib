@@ -11,6 +11,10 @@ import Foundation
 import UIKit
 import CoreData
 
+import FirebaseMessaging
+import UserNotifications
+import Firebase
+
 public class WalinnsTracker {
 
     //sharedInstance
@@ -20,10 +24,8 @@ public class WalinnsTracker {
     
      public static func initialize(project_token : String)  {
         print("WlinnsTrackerClient" + project_token)
-        
-        
- 
         WalinnsTrackerClient.init(token: project_token).start()
+        WalinnsDelegate.init()
      }
     
     func start(project_token : String)  {
@@ -72,6 +74,47 @@ public class WalinnsTracker {
         }
     }
    
+    public class WalinnsDelegate : UIResponder,UIApplicationDelegate , UNUserNotificationCenterDelegate , MessagingDelegate{
+        public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+            // Override point for customization after application launch.
+            FirebaseApp.configure()
+            print("WalinnsTrackerClient firebase" , "walinnsdelegate start")
+            if #available(iOS 10.0, *) {
+                let authOptions : UNAuthorizationOptions = [.alert, .badge, .sound]
+                UNUserNotificationCenter.current().requestAuthorization(
+                    options: authOptions,
+                    completionHandler: {_,_ in })
+                
+                // For iOS 10 display notification (sent via APNS)
+                UNUserNotificationCenter.current().delegate = self as! UNUserNotificationCenterDelegate
+                // For iOS 10 data message (sent via FCM)
+                Messaging.messaging().remoteMessageDelegate = self as! MessagingDelegate
+                
+            }
+            application.registerForRemoteNotifications()
+            return true
+        }
+        func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+            let userInfo = notification.request.content.userInfo
+            // Print message ID.
+            print("Message ID: \(userInfo["gcm.message_id"]!)")
+            
+            // Print full message.
+            print("%@", userInfo)
+            
+        }
+        
+        func application(received remoteMessage: MessagingRemoteMessage) {
+            print("%@", remoteMessage.appData)
+        }
+        func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+            print("WalinnsTrackerClient FCM token ", fcmToken)
+            WalinnsTracker.sendPushToken(push_token: fcmToken)
+            
+            UserDefaults.standard.set(fcmToken, forKey: "fcm_token")
+        }
+    }
+    
 }
 
 
