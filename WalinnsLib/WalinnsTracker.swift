@@ -15,13 +15,16 @@ import NotificationCenter
 
 
 public class WalinnsTracker {
-
+   
     //sharedInstance
     static let sharedInstance = WalinnsTracker()
     public static var flag : String = "na"
     public static var flag_1 : String = "na"
+   
     
-    public static func initialize(project_token : String , appDelegagte : UIApplicationDelegate)  {
+    
+    public let app_delegate : UIApplicationDelegate
+    public static func initialize(project_token : String)  {
         print("WlinnsTrackerClient" + project_token)
         
         WalinnsTrackerClient.init(token: project_token).start()
@@ -76,21 +79,7 @@ public class WalinnsTracker {
    
 
 
-    public class WalinnsDelegate : UIApplicationDelegate {
-        
-        public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-            // Override point for customization after application launch.
-            print("WalinnsTrackerClient :" , "will launch")
-            return true
-        }
-        public func applicationDidFinishLaunching(_ application: UIApplication) {
-             print("WalinnsTrackerClient :" , "will launch1")
-        }
-        public func applicationDidBecomeActive(_ application: UIApplication) {
-            print("WalinnsTrackerClient :" , "will active")
-        }
-       
-    }
+
     
 }
 

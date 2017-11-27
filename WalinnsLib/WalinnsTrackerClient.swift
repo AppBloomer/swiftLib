@@ -21,10 +21,12 @@ class WalinnsTrackerClient {
     var sessionEndTime: TimeInterval = 0
     var start_time : String = Utils.init().getCurrentUtc()
     var end_time : String = ""
+    let app_delgate : UIApplicationDelegate
     
     
-    init(token :String) {
+    init(token :String ) {
         self.project_token = token
+        
         
     }
     
@@ -248,7 +250,11 @@ class WalinnsTrackerClient {
         print("Bundle identifier object:" , jsonObject)
         convertToJson(json_obj : jsonObject ,service_name : "uninstallcount" )
     }
+    
+    
+    
 }
+
 
 
 
