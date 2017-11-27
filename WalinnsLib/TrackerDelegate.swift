@@ -9,23 +9,22 @@
 import Foundation
 import UIKit
 
-
-class TrackerDelegate: UIResponder , UIApplicationDelegate {
+public class TrackerDelegate: UIResponder , UIApplicationDelegate {
     
     
-    func applicationDidFinishLaunching(_ application: UIApplication) {
+   public func applicationDidFinishLaunching(_ application: UIApplication) {
         print("App active state : " + "App launsh" )
     }
     
-    func applicationDidBecomeActive(_ application: UIApplication) {
+   public func applicationDidBecomeActive(_ application: UIApplication) {
         print("App active state : " + "App active" )
     }
     
-    func applicationDidEnterBackground(_ application: UIApplication) {
+   public func applicationDidEnterBackground(_ application: UIApplication) {
         print("App active state : " + "App bg" )
     }
     
-    func applicationWillEnterForeground(_ application: UIApplication) {
+   public func applicationWillEnterForeground(_ application: UIApplication) {
           print("App active state : " + "App Fg" )
     }
     

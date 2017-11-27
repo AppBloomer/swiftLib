@@ -35,11 +35,11 @@ class DeviceData {
         return version
     }
    func carrierName() -> String {
-        let networkInfoo = CTTelephonyNetworkInfo()
-        let carrier = networkInfoo.subscriberCellularProvider
-        let carrierval  = carrier?.carrierName
-    
-        return carrierval!
+       // let networkInfoo = CTTelephonyNetworkInfo()
+      //  let carrier = networkInfoo.subscriberCellularProvider
+       // let carrierval  = carrier?.carrierName
+         let carrierval = "No sim"
+        return carrierval
     }
     
     func Connectivy_gen() -> String {

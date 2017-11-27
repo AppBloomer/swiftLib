@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1626C16BD1975135988F5BB3 /* Pods_WalinnsLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70677B10F725F59324D9F26F /* Pods_WalinnsLib.framework */; };
 		773827871FA99D7600A22F97 /* WalinnsLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7738277D1FA99D7400A22F97 /* WalinnsLib.framework */; };
 		7738278C1FA99D7600A22F97 /* WalinnsLibTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7738278B1FA99D7600A22F97 /* WalinnsLibTests.swift */; };
 		7738278E1FA99D7600A22F97 /* WalinnsLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 773827801FA99D7400A22F97 /* WalinnsLib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		773827981FA99DA200A22F97 /* WalinnsTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773827971FA99DA200A22F97 /* WalinnsTracker.swift */; };
 		7738279A1FA99DB700A22F97 /* WalinnsTrackerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773827991FA99DB700A22F97 /* WalinnsTrackerClient.swift */; };
+		893A95F270ADE7B268D93C21 /* Pods_WalinnsLibTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED506757A3E8D9B8927F8811 /* Pods_WalinnsLibTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +27,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		50CA051D2EFB61253B949A95 /* Pods-WalinnsLib.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalinnsLib.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalinnsLib/Pods-WalinnsLib.debug.xcconfig"; sourceTree = "<group>"; };
+		57CDB1D320403EC2D040EB28 /* Pods-WalinnsLibTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalinnsLibTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WalinnsLibTests/Pods-WalinnsLibTests.debug.xcconfig"; sourceTree = "<group>"; };
+		70677B10F725F59324D9F26F /* Pods_WalinnsLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalinnsLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7738277D1FA99D7400A22F97 /* WalinnsLib.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WalinnsLib.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		773827801FA99D7400A22F97 /* WalinnsLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WalinnsLib.h; sourceTree = "<group>"; };
 		773827811FA99D7600A22F97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -33,6 +38,9 @@
 		7738278D1FA99D7600A22F97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		773827971FA99DA200A22F97 /* WalinnsTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalinnsTracker.swift; sourceTree = "<group>"; };
 		773827991FA99DB700A22F97 /* WalinnsTrackerClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalinnsTrackerClient.swift; sourceTree = "<group>"; };
+		B23245785E27A2EFB2CCB550 /* Pods-WalinnsLibTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalinnsLibTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalinnsLibTests/Pods-WalinnsLibTests.release.xcconfig"; sourceTree = "<group>"; };
+		D99234C21274FB9D15324FF6 /* Pods-WalinnsLib.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WalinnsLib.release.xcconfig"; path = "Pods/Target Support Files/Pods-WalinnsLib/Pods-WalinnsLib.release.xcconfig"; sourceTree = "<group>"; };
+		ED506757A3E8D9B8927F8811 /* Pods_WalinnsLibTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WalinnsLibTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1626C16BD1975135988F5BB3 /* Pods_WalinnsLib.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +57,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				773827871FA99D7600A22F97 /* WalinnsLib.framework in Frameworks */,
+				893A95F270ADE7B268D93C21 /* Pods_WalinnsLibTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +70,8 @@
 				7738277F1FA99D7400A22F97 /* WalinnsLib */,
 				7738278A1FA99D7600A22F97 /* WalinnsLibTests */,
 				7738277E1FA99D7400A22F97 /* Products */,
+				D0A73748B3A08855DCD3D629 /* Pods */,
+				F9F7D1FBF32FD307774AA394 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,6 +104,26 @@
 			path = WalinnsLibTests;
 			sourceTree = "<group>";
 		};
+		D0A73748B3A08855DCD3D629 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				50CA051D2EFB61253B949A95 /* Pods-WalinnsLib.debug.xcconfig */,
+				D99234C21274FB9D15324FF6 /* Pods-WalinnsLib.release.xcconfig */,
+				57CDB1D320403EC2D040EB28 /* Pods-WalinnsLibTests.debug.xcconfig */,
+				B23245785E27A2EFB2CCB550 /* Pods-WalinnsLibTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F9F7D1FBF32FD307774AA394 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				70677B10F725F59324D9F26F /* Pods_WalinnsLib.framework */,
+				ED506757A3E8D9B8927F8811 /* Pods_WalinnsLibTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -110,10 +142,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 773827911FA99D7600A22F97 /* Build configuration list for PBXNativeTarget "WalinnsLib" */;
 			buildPhases = (
+				167A7303142DD483AF218711 /* [CP] Check Pods Manifest.lock */,
 				773827781FA99D7400A22F97 /* Sources */,
 				773827791FA99D7400A22F97 /* Frameworks */,
 				7738277A1FA99D7400A22F97 /* Headers */,
 				7738277B1FA99D7400A22F97 /* Resources */,
+				10A694D3DC42BF516BCF8931 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -128,9 +162,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 773827941FA99D7600A22F97 /* Build configuration list for PBXNativeTarget "WalinnsLibTests" */;
 			buildPhases = (
+				A23432759417E93C7EEBA4EA /* [CP] Check Pods Manifest.lock */,
 				773827821FA99D7600A22F97 /* Sources */,
 				773827831FA99D7600A22F97 /* Frameworks */,
 				773827841FA99D7600A22F97 /* Resources */,
+				BE8E89CEB7171BB285AFE462 /* [CP] Embed Pods Frameworks */,
+				D2BC6E124FCDB5B330ED0D9F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -197,6 +234,97 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		10A694D3DC42BF516BCF8931 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WalinnsLib/Pods-WalinnsLib-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		167A7303142DD483AF218711 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WalinnsLib-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A23432759417E93C7EEBA4EA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WalinnsLibTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BE8E89CEB7171BB285AFE462 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-WalinnsLibTests/Pods-WalinnsLibTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WalinnsLibTests/Pods-WalinnsLibTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D2BC6E124FCDB5B330ED0D9F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WalinnsLibTests/Pods-WalinnsLibTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		773827781FA99D7400A22F97 /* Sources */ = {
@@ -330,6 +458,7 @@
 		};
 		773827921FA99D7600A22F97 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50CA051D2EFB61253B949A95 /* Pods-WalinnsLib.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -350,6 +479,7 @@
 		};
 		773827931FA99D7600A22F97 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D99234C21274FB9D15324FF6 /* Pods-WalinnsLib.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -369,6 +499,7 @@
 		};
 		773827951FA99D7600A22F97 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57CDB1D320403EC2D040EB28 /* Pods-WalinnsLibTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = WalinnsLibTests/Info.plist;
@@ -381,6 +512,7 @@
 		};
 		773827961FA99D7600A22F97 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B23245785E27A2EFB2CCB550 /* Pods-WalinnsLibTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = WalinnsLibTests/Info.plist;

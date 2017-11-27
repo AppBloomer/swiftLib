@@ -137,8 +137,10 @@ class WalinnsTrackerClient {
 
     }
     func start() {
+      //  timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(handleMyFunction), userInfo: nil, repeats: true)
         timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(handleMyFunction), userInfo: nil, repeats: true)
-
+        
+        RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
        // print("Timer started Device ...start..." , "start")
        // guard timer == nil else { return }
        // timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(handleMyFunction), userInfo: nil, repeats: true)
@@ -167,6 +169,9 @@ class WalinnsTrackerClient {
                         self.DeviceReq()
                     }else if(WalinnsTracker.flag_1 == "active_status"){
                         self.appUserStatus(app_status : "yes")
+                    }else if(WalinnsTracker.flag_1 == "response_error"){
+                        print("Timer started else if" , WalinnsTracker.flag_1)
+                        self.stop()
                     }
                    
                 case .background:

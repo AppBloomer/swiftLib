@@ -28,7 +28,7 @@ class ApiClient : NSObject{
         return (singleton.sharedInstance)
     }
     
-    var url_base = "http://192.168.0.17:8083/"
+    var url_base = "http://192.168.0.07:8083/"
     func postRequest (api: String,jsonString : String, parameters: [String: Any]? = nil) {
         
         guard let destination = URL(string: url_base + api) else { return }
@@ -59,6 +59,7 @@ class ApiClient : NSObject{
                 }
             } else {
                 print("Http_response_error1",error ?? "")
+                self.api_call(falg_status: "response_error")
             }
         }
         task.resume()
@@ -91,6 +92,9 @@ class ApiClient : NSObject{
               WalinnsTracker.flag = "timer_end"
              print("Flag Status fetch_no" , falg_status)
              Utils.init().save_pref(key: "session" , value: "end")
+            break
+        case "response_error":
+            WalinnsTracker.flag_1 = "response_error"
             break
             
         default: break
