@@ -82,8 +82,8 @@ public class WalinnsTracker : NSObject{
             WalinnsTracker.sharedInstance.pushToken = push_token
         }
     }
-    public static func sendProfile(user_progile : NSDictionary){
-        
+    public static func sendProfile(user_profile : NSDictionary){
+        print("Json object for userprofile ", user_profile)
     }
     
 }
