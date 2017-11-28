@@ -35,7 +35,7 @@ class WalinnsTrackerClient {
         
     }
     
-    func DeviceReq() {
+    func DeviceReq(jsonobject : NSDictionary) {
          
         let jsonObject : NSMutableDictionary = NSMutableDictionary()
         jsonObject.setValue(device_id, forKey: "device_id")

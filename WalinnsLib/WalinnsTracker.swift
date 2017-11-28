@@ -55,7 +55,7 @@ public class WalinnsTracker : NSObject{
             
             DispatchQueue.main.async {
                 print("WalinnsTrackerClient start time" , self.start_time)
-                WalinnsTrackerClient.init(token: Utils.init().read_pref(key: "token")).DeviceReq()
+                WalinnsTrackerClient.init(token: Utils.init().read_pref(key: "token"))
             }
         }
         
@@ -84,6 +84,9 @@ public class WalinnsTracker : NSObject{
     }
     public static func sendProfile(user_profile : NSDictionary){
         print("Json object for userprofile ", user_profile)
+        if(Utils.init().read_pref(key: "token") != nil ){
+            WalinnsTrackerClient.init(token: Utils.init().read_pref(key: "token"))
+        }
     }
     
 }
