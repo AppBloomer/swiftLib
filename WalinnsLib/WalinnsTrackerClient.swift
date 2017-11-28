@@ -14,7 +14,7 @@ class WalinnsTrackerClient {
     
     var project_token : String
     var device_id = UIDevice.current.identifierForVendor!.uuidString
-    
+ 
     var timer: Timer!
     var sessionStartTime: TimeInterval = Date().timeIntervalSince1970
     var sessionLength: TimeInterval = 0
@@ -25,6 +25,14 @@ class WalinnsTrackerClient {
     
     init(token :String ) {
         self.project_token = token
+        if(UserDefaults.standard.string(forKey: device_id) != nil){
+         print("DEVICE ID second TIME: " , self.device_id , "old.." , UserDefaults.standard.string(forKey: device_id))
+        }else{
+         UserDefaults.standard.set(self.device_id, forKey: "device_id")
+         UserDefaults.standard.synchronize()
+         print("DEVICE ID FIRST TIME: " , self.device_id)
+        }
+        
     }
     
     func DeviceReq() {
@@ -135,89 +143,25 @@ class WalinnsTrackerClient {
         }
 
     }
-    func start() {
-      //  timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(handleMyFunction), userInfo: nil, repeats: true)
-        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(handleMyFunction), userInfo: nil, repeats: true)
-        
-        RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
-       // print("Timer started Device ...start..." , "start")
-       // guard timer == nil else { return }
-       // timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(handleMyFunction), userInfo: nil, repeats: true)
-    }
-    func stop() {
-        timer.invalidate()
-        //print("Timer started Device ...stop..." , "stop")
-       // guard timer != nil else { return }
-       // timer?.invalidate()
-        //timer = nil
-    }
+   
     
-    
-    @objc func handleMyFunction() {
-        // Code here
-         //print("Timer started client",Date())
-        DispatchQueue.global(qos: .background).async {
-            print("This is run on the background queue" , WalinnsTracker.flag_1+"......")
-            
-            DispatchQueue.main.async {
-                
-                switch UIApplication.shared.applicationState {
-                case .active:
-                    print("Timer started","Device status :" , "active" , WalinnsTracker.flag_1)
-                    if(WalinnsTracker.flag_1 == "na"){
-                        self.DeviceReq()
-                    }else if(WalinnsTracker.flag_1 == "active_status"){
-                        self.appUserStatus(app_status : "yes")
-                    }else if(WalinnsTracker.flag_1 == "response_error"){
-                        print("Timer started else if" , WalinnsTracker.flag_1)
-                        self.stop()
-                    }
-                   
-                case .background:
-                    print("Timer started","Device status :" , "bg", WalinnsTracker.flag)
-                    if(WalinnsTracker.flag == "na"){
-                       self.sessionEndTime = Date().timeIntervalSince1970
-                       self.end_time = Utils.init().getCurrentUtc()
-                       self.sessionLength = self.roundOneDigit(num: self.sessionEndTime - self.sessionStartTime)
-                       print("Timer started session length",self.sessionLength ,"start_time: ",self.sessionStartTime)
-                      self.sessionTrack(start_timee :self.start_time,end_time :self.end_time,session_lenth:self.sessionLength)
-                       
-                    }else if(WalinnsTracker.flag == "session"){
-                        self.appUserStatus(app_status : "no")
-                    }
-                    
-                    if(WalinnsTracker.flag == "timer_end" ){
-                    if(Utils.init().read_pref(key: "session") != nil && Utils.init().read_pref(key: "session") == "end" ){
-                        print("Timer started","Device status stop :" , "bg", Utils.init().read_pref(key: "session"))
-                         self.stop()
-                    }
-                    }
-                   
-                    
-                case .inactive:
-                     print("Timer started","Device status :" , "inactive", WalinnsTracker.flag)
-                     
-                    break
-                }
-            }
-        }
-
-    }
    
     func roundOneDigit(num: TimeInterval) -> TimeInterval {
         return round(num * 10.0) / 10.0
     }
-    public func sessionTrack(start_timee : String , end_time : String , session_lenth : Double){
-        
-        print("Timer started Device",WalinnsTracker.flag,"Session track data :" , start_timee , end_time, session_lenth)
-        let jsonObject : NSMutableDictionary = NSMutableDictionary()
-        jsonObject.setValue(device_id, forKey: "device_id")
-        jsonObject.setValue(String(format:"%f", session_lenth), forKey: "session_length")
-        jsonObject.setValue(start_timee, forKey: "start_time")
-        jsonObject.setValue(end_time, forKey: "end_time")
-        print("WalinnsTrackerClient session:", jsonObject )
-        convertToJson(json_obj : jsonObject ,service_name : "session" )
-        
+    public func sessionTrack(start_timee : String , end_time : String){
+        if (Utils.init().read_pref(key: "device_status") != nil){
+      let terminationDuration = Utils.init().UTCToLocal(date: end_time).timeIntervalSince(Utils.init().UTCToLocal(date: start_timee))
+
+                let jsonObject : NSMutableDictionary = NSMutableDictionary()
+                jsonObject.setValue(device_id, forKey: "device_id")
+                jsonObject.setValue(Utils.init().stringFromTimeInterval(interval: terminationDuration), forKey: "session_length")
+                jsonObject.setValue(start_timee, forKey: "start_time")
+                jsonObject.setValue(end_time, forKey: "end_time")
+                print("WalinnsTrackerClient session:", jsonObject )
+                convertToJson(json_obj : jsonObject ,service_name : "session" )
+        }
+
     }
     
     public func appUserStatus(app_status : String){
@@ -226,13 +170,13 @@ class WalinnsTrackerClient {
         jsonObject.setValue(device_id, forKey: "device_id")
         jsonObject.setValue(app_status, forKey: "active_status")
         jsonObject.setValue(Utils.init().getCurrentUtc(), forKey: "date_time")
-        print("WalinnsTrackerClient App user status:", app_status )
+        
         if(app_status == "yes"){
-             print("WalinnsTrackerClient App user status if:", app_status )
-             convertToJson(json_obj : jsonObject ,service_name : "fetchAppUserDetail" )
+            convertToJson(json_obj : jsonObject ,service_name : "fetchAppUserDetail" )
         }else{
-            print("WalinnsTrackerClient App user status else:", app_status )
-            convertToJson(json_obj : jsonObject ,service_name : "fetchAppUserDetail", flag_status : "fetch_no")
+            if (Utils.init().read_pref(key: "device_status") != nil){
+             convertToJson(json_obj : jsonObject ,service_name : "fetchAppUserDetail", flag_status : "fetch_no")
+            }
         }
     }
     public func appUninstallCount(pushToken : String){
