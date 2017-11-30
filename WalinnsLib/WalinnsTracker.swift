@@ -31,7 +31,9 @@ public class WalinnsTracker : NSObject{
                     print("EXCEPTION CAUGHT HERE....")
                     print("WalinnsTrackerClient error" , exception)
                     print("WalinnsTrackerClient reason",exception.callStackSymbols)
-          
+                }
+        
+        
         sharedInstance.start()
         print("WlinnsTrackerClient" + project_token , self)
         NotificationCenter.default.addObserver(WalinnsTracker.sharedInstance, selector: #selector(sharedInstance.appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
