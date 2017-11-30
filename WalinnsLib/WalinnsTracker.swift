@@ -26,15 +26,12 @@ public class WalinnsTracker : NSObject{
    
     public static func initialize(project_token : String)  {
         Utils.init().save_pref(key: "token", value:project_token)
-        DispatchQueue.global(qos: .background).async {
-            DispatchQueue.main.async {
+        
                 NSSetUncaughtExceptionHandler { exception in
                     print("EXCEPTION CAUGHT HERE....")
                     print("WalinnsTrackerClient error" , exception)
                     print("WalinnsTrackerClient reason",exception.callStackSymbols)
-                }
-            }
-        }
+          
         sharedInstance.start()
         print("WlinnsTrackerClient" + project_token , self)
         NotificationCenter.default.addObserver(WalinnsTracker.sharedInstance, selector: #selector(sharedInstance.appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
