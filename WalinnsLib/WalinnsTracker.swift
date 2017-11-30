@@ -22,9 +22,9 @@ public class WalinnsTracker : NSObject{
     public var start_time = Utils.init().getCurrentUtc()
     public var end_time = "na"
     public var pushToken = "na"
-  
+    public var profile : NSMutableDictionary? = nil
    
-    public static func initialize(project_token : String, viewController : UIViewController)  {
+    public static func initialize(project_token : String)  {
         Utils.init().save_pref(key: "token", value:project_token)
         sharedInstance.start()
         print("WlinnsTrackerClient" + project_token , self)
@@ -54,8 +54,16 @@ public class WalinnsTracker : NSObject{
             print("This is run on the background queue")
             
             DispatchQueue.main.async {
-                print("WalinnsTrackerClient start time" , self.start_time)
-                WalinnsTrackerClient.init(token: Utils.init().read_pref(key: "token"))
+                print("WalinnsTrackerClient start time" , WalinnsTracker.sharedInstance.profile)
+                 let dummy : NSMutableDictionary = NSMutableDictionary()
+                 if(Utils.init().read_pref(key: "token") != nil ){
+                    if(WalinnsTracker.sharedInstance.profile != nil ){
+                        WalinnsTrackerClient.init(token: Utils.init().read_pref(key: "token")).DeviceReq(jsonobject: WalinnsTracker.sharedInstance.profile!)
+                    }else{
+                        WalinnsTrackerClient.init(token: Utils.init().read_pref(key: "token")).DeviceReq(jsonobject: dummy)
+                    }
+                }
+                
             }
         }
         
@@ -84,9 +92,8 @@ public class WalinnsTracker : NSObject{
     }
     public static func sendProfile(user_profile : NSDictionary){
         print("Json object for userprofile ", user_profile)
-        if(Utils.init().read_pref(key: "token") != nil ){
-            WalinnsTrackerClient.init(token: Utils.init().read_pref(key: "token"))
-        }
+        WalinnsTracker.sharedInstance.profile = user_profile as! NSMutableDictionary
+       
     }
     
 }

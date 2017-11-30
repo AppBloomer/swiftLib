@@ -36,28 +36,36 @@ class WalinnsTrackerClient {
     }
     
     func DeviceReq(jsonobject : NSDictionary) {
+        let jsonObjectt : NSMutableDictionary = NSMutableDictionary()
+        if(jsonobject != nil && jsonobject.value(forKey: "email") != nil){
+              jsonObjectt.setValue(jsonobject.value(forKey: "gender"), forKey: "gender")
+             jsonObjectt.setValue(jsonobject.value(forKey: "email"), forKey: "email")
+             jsonObjectt.setValue(Utils.init().calcAge(birthday : jsonobject.value(forKey: "dob") as! String), forKey: "age")
+            
+        }else{
+             jsonObjectt.setValue("Male", forKey: "gender")
+             jsonObjectt.setValue(DeviceData.init().email(), forKey: "email")
+             jsonObjectt.setValue(DeviceData.init().age(), forKey: "age")
+        }
          
-        let jsonObject : NSMutableDictionary = NSMutableDictionary()
-        jsonObject.setValue(device_id, forKey: "device_id")
-        jsonObject.setValue(DeviceData.init().device_model(), forKey: "device_model")
-        jsonObject.setValue(DeviceData.init().os_name(), forKey: "os_name")
-        jsonObject.setValue(DeviceData.init().os_version(), forKey: "os_version")
-        jsonObject.setValue(DeviceData.init().app_version(), forKey: "app_version")
-        jsonObject.setValue(DeviceData.init().Connectivy_gen(), forKey: "connectivity")
-        jsonObject.setValue(DeviceData.init().carrierName(), forKey: "carrier")
-        jsonObject.setValue("false", forKey: "play_service")
-        jsonObject.setValue("false", forKey: "bluetooth")
-        jsonObject.setValue(DeviceData.init().screendpi(), forKey: "screen_dpi")
-        jsonObject.setValue(DeviceData.init().screenHeight(), forKey: "screen_height")
-        jsonObject.setValue(DeviceData.init().screenWidth(), forKey: "screen_width")
-        jsonObject.setValue(DeviceData.init().age(), forKey: "age")
-        jsonObject.setValue("Male", forKey: "gender")
-        jsonObject.setValue(DeviceData.init().language(), forKey: "language")
-        jsonObject.setValue(DeviceData.init().location(), forKey: "country")
-        jsonObject.setValue(DeviceData.init().email(), forKey: "email")
-        jsonObject.setValue(Utils.init().getCurrentUtc(),forKey: "date_time")
-        print("WalinnsTrackerClient Device:", jsonObject )
-        convertToJson(json_obj : jsonObject ,service_name : "devices" )
+        
+        jsonObjectt.setValue(device_id, forKey: "device_id")
+        jsonObjectt.setValue(DeviceData.init().device_model(), forKey: "device_model")
+        jsonObjectt.setValue(DeviceData.init().os_name(), forKey: "os_name")
+        jsonObjectt.setValue(DeviceData.init().os_version(), forKey: "os_version")
+        jsonObjectt.setValue(DeviceData.init().app_version(), forKey: "app_version")
+        jsonObjectt.setValue(DeviceData.init().Connectivy_gen(), forKey: "connectivity")
+        jsonObjectt.setValue(DeviceData.init().carrierName(), forKey: "carrier")
+        jsonObjectt.setValue("false", forKey: "play_service")
+        jsonObjectt.setValue("false", forKey: "bluetooth")
+        jsonObjectt.setValue(DeviceData.init().screendpi(), forKey: "screen_dpi")
+        jsonObjectt.setValue(DeviceData.init().screenHeight(), forKey: "screen_height")
+        jsonObjectt.setValue(DeviceData.init().screenWidth(), forKey: "screen_width")
+        jsonObjectt.setValue(DeviceData.init().language(), forKey: "language")
+        jsonObjectt.setValue(DeviceData.init().location(), forKey: "country")
+        jsonObjectt.setValue(Utils.init().getCurrentUtc(),forKey: "date_time")
+        print("WalinnsTrackerClient Device:", jsonObjectt )
+        convertToJson(json_obj : jsonObjectt ,service_name : "devices" )
         
         
     }

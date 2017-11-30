@@ -9,11 +9,13 @@
 import Foundation
 import UIKit
 import CoreTelephony
+import CoreLocation
 
 
 class DeviceData {
+    static let sharedInstance = DeviceData()
     public var connectivty : String = ""
-    
+    var locationManager: CLLocationManager!
     
     func os_name() -> String {
        return "ios"
@@ -38,7 +40,7 @@ class DeviceData {
        // let networkInfoo = CTTelephonyNetworkInfo()
       //  let carrier = networkInfoo.subscriberCellularProvider
        // let carrierval  = carrier?.carrierName
-         let carrierval = "No sim"
+        let carrierval = "No sim"
         return carrierval
     }
     
@@ -125,10 +127,14 @@ class DeviceData {
     }
     
     func location( ) -> String {
-        
-        return "IN"
+        let countryCode = NSLocale.current.regionCode
+        print("Country code" , countryCode)
+
+        return countryCode!
         
     }
+    
+  
     
     func email() -> String {
         return "example@gmail.com"
