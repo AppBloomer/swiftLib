@@ -200,6 +200,12 @@ class WalinnsTrackerClient {
         convertToJson(json_obj : jsonObject ,service_name : "uninstallcount" )
     }
     
+    func crashStatus(crash_reason : String) {
+        let jsonObject : NSMutableDictionary = NSMutableDictionary()
+        jsonObject.setValue(device_id, forKey: "device_id")
+        jsonObject.setValue(crash_reason, forKey: "reason")
+        jsonObject.setValue(Utils.init().getCurrentUtc(), forKey: "date_time")
+    }
     
     
 }

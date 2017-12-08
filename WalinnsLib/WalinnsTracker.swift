@@ -23,6 +23,7 @@ public class WalinnsTracker : NSObject{
     public var end_time = "na"
     public var pushToken = "na"
     public var profile : NSMutableDictionary? = nil
+    public var exception_ : String = "na"
    
     public static func initialize(project_token : String)  {
         Utils.init().save_pref(key: "token", value:project_token)
@@ -31,6 +32,7 @@ public class WalinnsTracker : NSObject{
                     print("EXCEPTION CAUGHT HERE....")
                     print("WalinnsTrackerClient error" , exception)
                     print("WalinnsTrackerClient reason",exception.callStackSymbols)
+                   // CrashStatus(crash_reason: String(describing: exception))
                 }
         
         
@@ -38,6 +40,7 @@ public class WalinnsTracker : NSObject{
         print("WlinnsTrackerClient" + project_token , self)
         NotificationCenter.default.addObserver(WalinnsTracker.sharedInstance, selector: #selector(sharedInstance.appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
         WalinnsTrackerClient.init(token: project_token)
+        
      }
     
      @objc func appMovedToBackground(){
@@ -104,7 +107,10 @@ public class WalinnsTracker : NSObject{
        
     }
     
-   
+    public static func CrashStatus(crash_reason : String){
+        
+        WalinnsTrackerClient.init(token: Utils.init().read_pref(key: "token")).crashStatus(crash_reason: crash_reason)
+    }
     
 }
 
