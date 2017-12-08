@@ -54,7 +54,7 @@ class WalinnsTrackerClient {
         jsonObjectt.setValue(DeviceData.init().os_name(), forKey: "os_name")
         jsonObjectt.setValue(DeviceData.init().os_version(), forKey: "os_version")
         jsonObjectt.setValue(DeviceData.init().app_version(), forKey: "app_version")
-        jsonObjectt.setValue(DeviceData.init().Connectivy_gen(), forKey: "connectivity")
+        jsonObjectt.setValue(DeviceData.init().checkWiFi, forKey: "connectivity")
         jsonObjectt.setValue(DeviceData.init().carrierName(), forKey: "carrier")
         jsonObjectt.setValue("false", forKey: "play_service")
         jsonObjectt.setValue("false", forKey: "bluetooth")

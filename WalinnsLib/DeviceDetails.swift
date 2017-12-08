@@ -157,6 +157,20 @@ class DeviceData {
         }
 
     }
-    
+    func checkWiFi() -> String {
+        
+        let networkStatus = Reachability().connectionStatus()
+        switch networkStatus {
+        case .Unknown, .Offline:
+            print("Connected via No internet")
+            return "No Internet"
+        case .Online(.WWAN):
+            print("Connected via WWAN")
+            return "Mobile Data"
+        case .Online(.WiFi):
+            print("Connected via WiFi")
+            return "WiFi"
+        }
+    }
     
 }
